@@ -1,0 +1,35 @@
+{
+  "name": "orel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "discord": "^0.8.2",
+    "discord.js": "^11.3.2",
+    "discord.js-commando": "^0.9.0",
+    "eventemitter2": "^5.0.0",
+    "eventemitter3": "^3.1.0",
+    "ffmpeg-binaries": "^3.2.2-3",
+    "fs": "0.0.1-security",
+    "get-youtube-id": "^1.0.0",
+    "icy": "^2.1.0",
+    "mathjs": "^3.17.0",
+    "moment": "^2.19.4",
+    "opusscript": "0.0.6",
+    "pako": "^1.0.6",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "tweetnacl": "^1.0.0",
+    "ws": "^4.0.0",
+    "youtube-info": "^1.1.3",
+    "ytdl-core": "^0.20.2"
+  },
+  "devDependencies": {}
+}
