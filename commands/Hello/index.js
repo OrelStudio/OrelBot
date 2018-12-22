@@ -18,16 +18,11 @@ module.exports = class HelloCommand extends commando.Command {
       if (message.content === '!hello' && message.author.id === '215705227498618880') {
         message.channel.send("hey Orel");
         return;
-      }
-      if (message.content === '!hello' && message.author.id === '336453130378280971') {
+      } else if(message.content === '!hello' && message.author.id === '336453130378280971') {
         message.channel.send('Hello Tal :smile: ')
-      }
-      return;
-      if (message.content === '!hello' && message.author.id === '351992534349774848') {
-        message.channel.send('Hey Mega :smile: ')
-      }
-      if (message.content === '!hello') {
-        message.reply("hello");
+        return;
+      } else if (message.content === '!hello') {
+        message.reply("hello :)");
         console.log("hello command");
         return;
       }

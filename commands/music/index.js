@@ -20,7 +20,7 @@ const prefix = config.prefix;
 let isPlaying;
 let stream;
 
-let guilds = {};
+var guilds = {};
 
 const addGuild = (guild) => {
   if (guild && guild.id && !guilds.hasOwnProperty(guild.id)) {
@@ -89,7 +89,7 @@ class Musicc {
                   throw new Error(err);
                 }
                 guilds[message.guild.id].queueNames.push(videoInfo.title);
-                message.channel.send(" now playing: **" + videoInfo.title + "**");
+                message.channel.send(`now playing: **${videoInfo.title}**`);
                 console.log(`playing ${videoInfo.title} in server: ${guild.name} time: ${message.createdAt} user: ${message.author} channel: ${message.channel}`);
               });
             });
@@ -98,18 +98,19 @@ class Musicc {
           message.reply(" you need to be in a voice channel!");
         }
       } else if (mess.startsWith(prefix + "skip")) {
-        if (guilds[message.guild.id].skippers.indexOf(message.author.id) === -1) {
-          guilds[message.guild.id].skippers.push(message.author.id);
-          guilds[message.guild.id].skipReq++;
-          if (guilds[message.guild.id].skipReq >= Math.ceil((guilds[message.guild.id].voiceChannel.members.size - 1) / 2)) {
-            skip_song(message);
-            message.reply(" your skip has been acknowledged. Skipping now!");
-          } else {
-            message.reply(" your skip has been acknowledged. You need **" + Math.ceil((guilds[message.guild.id].voiceChannel.members.size - 1) / 2) - guilds[message.guild.id].skipReq) = "**  more skip votes!";
-          }
-        } else {
-          message.reply(" you already voted to skip!");
-        }
+        skip_song(message);
+        // if (guilds[message.guild.id].skippers.indexOf(message.author.id) === -1) {
+        //   guilds[message.guild.id].skippers.push(message.author.id);
+        //   guilds[message.guild.id].skipReq++;
+        //   if (guilds[message.guild.id].skipReq >= Math.ceil((guilds[message.guild.id].voiceChannel.members.size - 1) / 2)) {
+        //     skip_song(message);
+        //     message.reply(" your skip has been acknowledged. Skipping now!");
+        //   } else {
+        //     message.reply(" your skip has been acknowledged. You need **" + Math.ceil((guilds[message.guild.id].voiceChannel.members.size - 1) / 2) - guilds[message.guild.id].skipReq) = "**  more skip votes!";
+        //   }
+        // } else {
+        //   message.reply(" you already voted to skip!");
+        // }
       } else if (mess.startsWith(prefix + "queue")) {
         let message2 = "```";
         for (let i = 0; i < guilds[message.guild.id].queueNames.length; i++) {

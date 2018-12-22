@@ -13,7 +13,6 @@ bot.registry.registerDefaults();
 bot.registry.registerCommandsIn(path.resolve(__dirname, './commands'));
 
 bot.login(config.discord.token);
-//bot.setYoutubeKey("AIzaSyDaVjQwB8Mh9RWPHj26TtDLSyyOwyFxxVM");
 bot.on('ready', () => {
   console.log('I am up')
   bot.user.setGame('with Orel')
