@@ -1,0 +1,16 @@
+{
+  "215705227498618880": {
+    "money": 500,
+    "username": "OrelStudio",
+    "id": 215705227498618880,
+    "used": true,
+    "isAdmin": true
+  },
+  "347264818341871616": {
+    "money": 23423,
+    "username": "Eden",
+    "id": 347264818341871600,
+    "used": true,
+    "isAdmin": false
+  }
+}
