@@ -4,7 +4,7 @@ const Discord = require('discord.js')
 const fs = require('fs')
 const data = require(`${__dirname}/config/data.json`)
 const editJsonFile = require("edit-json-file")
-const bank = require('./bank')
+const Bank = require('./bank')
 
 let file = editJsonFile(`${__dirname}/config/data.json`)
 
@@ -33,7 +33,17 @@ class Casino {
       this.gambles = []
       client.on('message', (message) => {
         if (message.content.startsWith('!register')) {
-          bank.register(message.author)
+          // console.log('auth', message.author)
+          Bank.register({
+            id: message.author.id,
+            username: message.author.username
+          }).then((user) => {
+            console.info('user saved', user)
+            message.channel.send('New user registered', user)
+          }).catch((e) => {
+            console.error(e)
+            message.channel.send(`An error accured: ${e.message}`)
+          })
         }
         // if (false)
         //   // user data

@@ -4,29 +4,29 @@ const fs = require('fs')
 
 const loadStorage = () => {
   return new Promise((resolve, reject) => {
-    fs.readFile('./commands/casino/bank/storage.json', (err, data) => {
+    fs.readFile('./commands/casino/bank/storage.json', 'utf8', (err, data) => {
       if (err) {
         return reject(err)
       }
-      return resolve(data)
+      return resolve(JSON.parse(data))
     })
   })
 }
 
-const saveStorage = (data) => {
+const saveStorage = (data = []) => {
   return new Promise((resolve, reject) => {
-    fs.writeFile('./commands/casino/bank/storage.json', data, (err) => {
+    fs.writeFile('./commands/casino/bank/storage.json', JSON.stringify(data, null, 2), (err) => {
       return err ? reject(err) : resolve(data)
     })
   })
 }
 
 class Storage {
-  static load () {
-    return loadStorage()
+  static load (...args) {
+    return loadStorage(...args)
   }
-  static save () {
-    return saveStorage()
+  static save (...args) {
+    return saveStorage(...args)
   }
 }
 

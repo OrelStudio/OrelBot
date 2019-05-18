@@ -13,7 +13,7 @@ class User {
   }
 
   get username () {
-    return this.author ? this.author.username : ''
+    return this.author ? this.author : ''
   }
 
   load () {
@@ -25,16 +25,31 @@ class User {
       }
       this.id = user.id
       this.money = user.money
-      this.author = user.author
+      this.author = username
       return this
     })
   }
 
   save () {
-    return Storage.load().then((data) => {
-      const index = data.findIndex(user => user.id = this.id)
-      const newData = [...data.slice(0, index), this.toJSON(), ...data.slice(index + 1, data.length)]
+    return Storage.load().then((data = []) => {
+      const index = data.findIndex(user => user.id === this.id)
+      const newData = index > 0 ? [...data.slice(0, index), this.toJSON(), ...data.slice(index + 1, data.length)] : [...data, this.toJSON()]
       return Storage.save(newData)
+    }).then((data = []) => {
+      const user = data.find((user) => user.id === this.id)
+      if (!user) {
+        return Promise.reject(new Error('User wasn\'t saved'))
+      }
+      return user
+    })
+  }
+
+  setMoney (money) {
+    const {money: originMoney} = this
+    this.money = money
+    return this.save().catch((e) => {
+      this.money = originMoney
+      return Promise.reject(e)
     })
   }
 

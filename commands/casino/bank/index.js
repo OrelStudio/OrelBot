@@ -46,9 +46,10 @@ class Bank {
 
   static getMoney (user) {
     return Storage.load().then((users = []) => {
-      const tUser = user.find(u => user.id === u.id)
-      getUser(tUser)
-      return tUser.money
+      const tUser = users.find(u => user.id === u.id)
+      return getUser(tUser)
+    }).then((user) => {
+      return user.money
     })
   }
 
@@ -56,20 +57,17 @@ class Bank {
    * move money from A to B
    */
   static transact (movedBy, elseUser, sumMoney) {
-    Storage.load().then(() => {
+    return Storage.load().then(() => {
       if (users.hasOwnProperty(movedBy.id) && users.hasOwnProperty(elseUser.id)) {
         movedBy.money -= sumMoney
         elseUser.money = sumMoney
       }
     })
+    return Promise.all([movedBy.save(), elseUser.save()])
   }
 
-  static addMoney (addedTo, sum) {
-    Storage.load(() => {
-      if (users.hasOwnProperty(addedTo, sum)) {
-        addedTo.money = sum
-      }
-    })
+  static addMoney (user, sum) {
+    return user.setMoney(sum)
   }
 }
 
